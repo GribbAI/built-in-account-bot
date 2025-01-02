@@ -5,7 +5,8 @@ GribAI - это интерактивный бот который может бы
 ## Установка
 - Убедитесь, что у вас установлен Python 3.7 или выше.
 
-- Установите необходимые библиотеки с помощью pip:
+
+Установите необходимые библиотеки с помощью pip:
 ```bash
 pip install pyrogram tgcrypto numpy pillow
 ```
@@ -13,6 +14,7 @@ pip install pyrogram tgcrypto numpy pillow
 
 ## Конфигурация
 Замените значения `API_ID`, `API_HASH` и `PHONE_NUMBER` на свои собственные данные.
+
 Получить `API_ID` и `API HASH` можно на этом [сайте](https://my.telegram.org)
 
 
