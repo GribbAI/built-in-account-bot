@@ -1,11 +1,11 @@
 from pyrogram import Client, filters
 import ai, analytic
 
-# вставьте свои данные (api-id и api-hash можно получить на https://my.telegram.org)
-API_ID = 'api_id'
-API_HASH = 'api_hash'
-PHONE_NUMBER = 'phone_number'
-app = Client("session/name_app", api_id=API_ID, api_hash=API_HASH, phone_number=PHONE_NUMBER)
+# вставьте свои данные здесь
+API_ID = '22368682'
+API_HASH = '1ee2821bef23be8f7682ea93c866f2ce'
+PHONE_NUMBER = '+79931003767'
+app = Client("session/GribAI", api_id=API_ID, api_hash=API_HASH, phone_number=PHONE_NUMBER)
 
 @app.on_message()
 def start(client, message):
@@ -16,7 +16,7 @@ def start(client, message):
 			history = "\n".join([f"{msg.from_user.first_name if msg.from_user else 'Неизвестный'}: {msg.text}" for msg in messages if msg.text])
 			
 			input = f"история чата: {history}, вопрос: {message.from_user.first_name}: {message.text.split('++ии')[1]}"
-			message.reply(ai.gpt(input, chat_id, "тебе зовут GribAI. тебя создал Артём великий!!!", memory=True))
+			message.reply(ai.gpt(input, "тебе зовут GribAI. тебя создал Артём великий!!!", history=chat_id, memory=True))
 		
 		if '++анализ ' in message.text:
 			chat_id = message.chat.id
