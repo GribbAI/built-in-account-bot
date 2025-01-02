@@ -21,7 +21,7 @@ def gpt(text, history, promt="", memory=False):
 			context.append(table)
 			res = requests.post('http://api.onlysq.ru/ai/v1', json=context)
 		
-		context.append(res.json())
+		context.append({"role": "assistant", "content": res.json()['answer']})
 		with open(f'memory/{history}.json', 'w') as file:
 			json.dump(context, file)
 	else:
