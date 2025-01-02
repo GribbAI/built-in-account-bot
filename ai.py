@@ -1,17 +1,17 @@
 import requests, json, os
 
 
-def gpt(text, history, promt="", memory=False):
-	if os.path.isfile(f'memory/{history}.json'):
-		with open(f'memory/{history}.json', 'r') as file:
-			context = json.load(file)
-	else:
-		with open(f'memory/{history}.json', 'w') as file:
-			json.dump([], file)
-		with open(f'memory/{history}.json', 'r') as file:
-			context = json.load(file)
-	
+def gpt(text, promt="", history=None, memory=False):
 	if memory:
+		if os.path.isfile(f'memory/{history}.json'):
+			with open(f'memory/{history}.json', 'r', encoding='utf-8') as file:
+				context = json.load(file)
+		else:
+			with open(f'memory/{history}.json', 'w', encoding='utf-8') as file:
+				json.dump([], file)
+			with open(f'memory/{history}.json', 'r', encoding='utf-8') as file:
+				context = json.load(file)
+		
 		if not context:
 			table = {"role": "user", "content": promt + text}
 			context.append(table)
@@ -22,7 +22,7 @@ def gpt(text, history, promt="", memory=False):
 			res = requests.post('http://api.onlysq.ru/ai/v1', json=context)
 		
 		context.append({"role": "assistant", "content": res.json()['answer']})
-		with open(f'memory/{history}.json', 'w') as file:
+		with open(f'memory/{history}.json', 'w', encoding='utf-8') as file:
 			json.dump(context, file)
 	else:
 		table = [{"role": "user", "content": promt + text}]
